@@ -8,14 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.yarxi = void 0;
-const puppeteer_1 = __importDefault(require("puppeteer"));
-const yarxi = (input) => __awaiter(void 0, void 0, void 0, function* () {
-    const browser = yield puppeteer_1.default.launch({ headless: false });
+const yarxi = (browser, input) => __awaiter(void 0, void 0, void 0, function* () {
     const page = yield browser.newPage();
     yield page.goto("https://www.yarxi.ru/online/");
     yield page.waitForSelector("#tab_tango");
@@ -38,6 +33,5 @@ const yarxi = (input) => __awaiter(void 0, void 0, void 0, function* () {
     else {
         console.log("#entryframe не найден или не содержит контент.");
     }
-    //   await browser.close();
 });
 exports.yarxi = yarxi;

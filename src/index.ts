@@ -1,8 +1,13 @@
 import puppeteer from "puppeteer";
 import { yarxi } from "./services/yarxi";
+import { findMeaning } from "./services/findMeaning";
 
 export const bootstrap = async () => {
-  await yarxi("日");
+  const browser = await puppeteer.launch({ headless: false });
+
+  const kanji = "日";
+  await yarxi(browser, kanji);
+  await findMeaning(browser, kanji);
   //   await browser.close();
 };
 

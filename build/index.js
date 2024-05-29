@@ -8,11 +8,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.bootstrap = void 0;
+const puppeteer_1 = __importDefault(require("puppeteer"));
 const yarxi_1 = require("./services/yarxi");
+const findMeaning_1 = require("./services/findMeaning");
 const bootstrap = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield (0, yarxi_1.yarxi)("日");
+    const browser = yield puppeteer_1.default.launch({ headless: false });
+    const kanji = "日";
+    yield (0, yarxi_1.yarxi)(browser, kanji);
+    yield (0, findMeaning_1.findMeaning)(browser, kanji);
     //   await browser.close();
 });
 exports.bootstrap = bootstrap;

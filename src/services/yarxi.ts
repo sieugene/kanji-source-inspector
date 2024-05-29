@@ -1,7 +1,6 @@
-import puppeteer from "puppeteer";
+import { Browser } from "puppeteer";
 
-export const yarxi = async (input: string) => {
-  const browser = await puppeteer.launch({ headless: false });
+export const yarxi = async (browser: Browser, input: string) => {
   const page = await browser.newPage();
 
   await page.goto("https://www.yarxi.ru/online/");
@@ -30,6 +29,4 @@ export const yarxi = async (input: string) => {
   } else {
     console.log("#entryframe не найден или не содержит контент.");
   }
-
-  //   await browser.close();
 };
