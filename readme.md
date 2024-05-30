@@ -1,0 +1,1 @@
+This project is a tool for obtaining various information about kanji in Japanese. It uses Puppeteer to automate browser tasks and provides several services to extract data from various online resources.
