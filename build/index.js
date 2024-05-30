@@ -8,24 +8,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.bootstrap = void 0;
-const puppeteer_1 = __importDefault(require("puppeteer"));
-const yarxi_1 = require("./services/yarxi");
-const findMeaning_1 = require("./services/findMeaning");
+const app_1 = require("./app");
+const ServiceBaseInfo_1 = require("./services/ServiceBaseInfo");
+const ServicePartial_1 = require("./services/ServicePartial");
+const ServiceYarxi_1 = require("./services/ServiceYarxi");
 const bootstrap = () => __awaiter(void 0, void 0, void 0, function* () {
-    const browser = yield puppeteer_1.default.launch({ headless: false });
-    const kanji = "日";
-    yield (0, yarxi_1.yarxi)(browser, kanji);
-    yield (0, findMeaning_1.findMeaning)(browser, kanji);
-    //   await browser.close();
+    console.log("start");
+    const app = new app_1.App();
+    app.process({
+        kanji: "日",
+        services: [ServiceYarxi_1.ServiceYarxi, ServiceBaseInfo_1.ServiceBaseInfo, ServicePartial_1.ServicePartial],
+    });
+    console.log("end");
 });
 exports.bootstrap = bootstrap;
-(() => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("start");
-    yield (0, exports.bootstrap)();
-    console.log("end");
-}))();
+(0, exports.bootstrap)();

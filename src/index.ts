@@ -1,18 +1,16 @@
-import puppeteer from "puppeteer";
-import { yarxi } from "./services/yarxi";
-import { findMeaning } from "./services/findMeaning";
+import { App } from "./app";
+import { ServiceBaseInfo } from "./services/ServiceBaseInfo";
+import { ServicePartial } from "./services/ServicePartial";
+import { ServiceYarxi } from "./services/ServiceYarxi";
 
 export const bootstrap = async () => {
-  const browser = await puppeteer.launch({ headless: false });
-
-  const kanji = "日";
-  await yarxi(browser, kanji);
-  await findMeaning(browser, kanji);
-  //   await browser.close();
+  console.log("start");
+  const app = new App();
+  await app.process({
+    kanji: "日",
+    services: [ServiceYarxi, ServiceBaseInfo, ServicePartial],
+  });
+  console.log("end");
 };
 
-(async () => {
-  console.log("start");
-  await bootstrap();
-  console.log("end");
-})();
+bootstrap();
